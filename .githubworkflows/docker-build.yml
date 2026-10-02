@@ -1,0 +1,48 @@
+name: CI/CD Docker Build Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Backend Docker Image
+        run: docker build -t backend-service:latest ./backend
+
+      - name: Build Frontend Docker Image
+        run: docker build -t frontend-service:latest ./frontend
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config
+```[cite: 21]
+
+---
+
+### Step 2: GitHub par Repository Create Karein
+1. Apne browser mein [github.com](https://github.com) par jayein[cite: 22].
+2. Top-right corner par **`+`** icon par click karke **New repository** select karein[cite: 22].
+3. Repository ka naam **`electromart-docker-demo`** rakhein, **Public** select karein, aur **Create repository** par click karein[cite: 22].
+4. GitHub aapko ek repository URL dega, use copy kar lein[cite: 22].
+
+---
+
+### Step 3: Terminal se Code Push Karein
+Apne computer ka terminal open karein, apne project ke root folder (`electromart-docker-demo`) par jayein, aur yeh commands ek-ek karke run karein[cite: 22]:
+
+```bash
+git init
+git add .
+git commit -m "Initial commit - ElectroMart Fullstack Docker and CI Setup"
+git branch -M main
+git remote add origin https://github.com/<YOUR-GITHUB-USERNAME>/electromart-docker-demo.git
+git push -u origin main

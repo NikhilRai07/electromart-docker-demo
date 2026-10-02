@@ -1,0 +1,21 @@
+import axios from 'axios';
+
+// Agar Docker ke through chal raha hai toh nginx proxy /api/ handle karega, 
+// local dev ke liye direct backend URL use kar sakte hain
+const API_BASE_URL = '/api/products';
+
+export const getProducts = () => {
+    return axios.get(API_BASE_URL);
+};
+
+export const createProduct = (productData) => {
+    return axios.post(API_BASE_URL, productData);
+};
+
+export const updateProduct = (id, productData) => {
+    return axios.put(`${API_BASE_URL}/${id}`, productData);
+};
+
+export const deleteProduct = (id) => {
+    return axios.delete(`${API_BASE_URL}/${id}`);
+};
